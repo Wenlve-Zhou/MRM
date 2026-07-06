@@ -93,19 +93,6 @@ mrm_losses = model._decode_head_forward_train(
 )
 ```
 
-`_decode_head_forward_train` returns a loss dictionary in MMSegmentation. Add
-the MRM losses to your original training losses with a new prefix or a separate
-weight:
-
-```python
-losses = {}
-losses.update(source_losses)
-losses.update(uda_losses)
-
-for name, value in mrm_losses.items():
-    losses[f"mrm.{name}"] = lambda_mrm * value
-```
-
 During inference, use only the original segmentation model:
 
 ```python
